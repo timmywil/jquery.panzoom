@@ -84,6 +84,10 @@ export function setTransform(
   { x, y, scale, isSVG }: CurrentValues,
   _options?: PanzoomOptions
 ) {
+  if (_options !== undefined && _options.roundToPixels) {
+    x = Math.round(x)
+    y = Math.round(y)
+  }
   setStyle(elem, 'transform', `scale(${scale}) translate(${x}px, ${y}px)`)
   if (isSVG && isIE) {
     const matrixValue = window.getComputedStyle(elem).getPropertyValue('transform')
